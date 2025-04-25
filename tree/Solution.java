@@ -45,4 +45,27 @@ class Solution {
             resList.add(itemList);
         }
     }
+
+
+    // 199 Binary Tree Right Side View(BFS)
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Queue<TreeNode> que = new LinkedList<>();
+
+        if (root == null) return result;
+
+        que.offer(root);
+
+        while(!que.isEmpty()) {
+            int size = que.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode temp = que.poll();
+                if (temp.left != null) que.offer(temp.left);
+                if (temp.right != null) que.offer(temp.right);
+                if (i == size - 1) result.add(temp.val);
+            }
+        }
+        
+        return result;
+    }
 }
