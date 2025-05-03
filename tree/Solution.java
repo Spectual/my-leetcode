@@ -68,4 +68,39 @@ class Solution {
         
         return result;
     }
+
+
+    // 116 Populating Next Right Pointers in Each Node(BFS)
+    public Node connect(Node root) {
+        Queue<Node> que = new LinkedList<>();
+        if (root != null) que.offer(root);
+
+        while(!que.isEmpty()) {
+            int levelSize = que.size();
+            for (int i = 0; i < levelSize; i++) {
+                Node poll = que.poll();
+                Node next = que.peek();
+                if (poll.left != null) que.offer(poll.left);
+                if (poll.right != null) que.offer(poll.right);
+                poll.next = i == levelSize - 1 ? null : next;
+            }
+        }
+
+        return root;
+    }
+
+
+    // 226 Invert Binary Tree
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) return null;
+
+        TreeNode temp;
+        temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        invertTree(root.left);
+        invertTree(root.right);
+
+        return root;
+    }
 }
