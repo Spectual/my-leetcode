@@ -130,4 +130,16 @@ class Solution {
         int right = maxDepth(root.right);
         return Math.max(left, right) + 1;
     }
+
+    // 111 Minimum Depth of Binary Tree
+    public int minDepth(TreeNode root) {
+        if (root == null) return 0;
+        int left = minDepth(root.left);
+        int right = minDepth(root.right);
+
+        if (root.left != null && root.right == null) return 1 + left;
+        if (root.left == null && root.right != null) return 1 + right;
+
+        return Math.min(left, right) + 1;
+    }
 }
