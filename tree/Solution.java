@@ -142,4 +142,29 @@ class Solution {
 
         return Math.min(left, right) + 1;
     }
+
+
+    // 222 Count Complete Tree Nodes
+    public int countNodes(TreeNode root) {
+        if (root == null) return 0;
+        int left = countNodes(root.left);
+        int right = countNodes(root.right);
+        return left + right + 1;
+    }
+
+
+    // 110 Balanced Binary tree
+    public int getHeight(TreeNode root) {
+        if (root == null) return 0;
+
+        int left = getHeight(root.left);
+        if (left == -1) return -1;
+        int right = getHeight(root.right);
+        if (right == -1) return -1;
+        return Math.abs(left - right) > 1 ? -1 : Math.max(left, right) + 1;
+    }
+
+    public boolean isBalanced(TreeNode root) {
+        return getHeight(root) == -1 ? false: true;
+    }
 }
