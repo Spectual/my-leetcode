@@ -167,4 +167,15 @@ class Solution {
     public boolean isBalanced(TreeNode root) {
         return getHeight(root) == -1 ? false: true;
     }
+
+
+    // 404 Sum of Left Leaves
+    public int sumOfLeftLeaves(TreeNode root) {
+        if (root == null) return 0;
+        int val = 0;
+        if (root.left != null && root.left.left == null && root.left.right == null) val = root.left.val;
+        int left = sumOfLeftLeaves(root.left);
+        int right = sumOfLeftLeaves(root.right);
+        return left + right + val;
+    }
 }
