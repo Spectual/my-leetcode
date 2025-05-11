@@ -178,4 +178,15 @@ class Solution {
         int right = sumOfLeftLeaves(root.right);
         return left + right + val;
     }
+
+
+    // 700 Search in a Binary Search Tree
+    public TreeNode searchBST(TreeNode root, int val) {
+        if (root == null || root.val == val) return root;
+
+        TreeNode result = null;
+        if (root.val > val) result = searchBST(root.left, val);
+        if (root.val < val) result = searchBST(root.right, val);
+        return result;
+    }
 }
