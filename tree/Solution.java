@@ -189,4 +189,21 @@ class Solution {
         if (root.val < val) result = searchBST(root.right, val);
         return result;
     }
+
+
+    // 98 Validate Binary Search Tree
+    List<Integer> vec = new ArrayList<>();
+    void traversal(TreeNode root) {
+        if (root == null) return;
+        traversal(root.left);
+        vec.add(root.val);
+        traversal(root.right);
+    }
+    public boolean isValidBST(TreeNode root) {
+        traversal(root);
+        for (int i = 1; i < vec.size(); i++) {
+            if (vec.get(i) <= vec.get(i-1)) return false;
+        }
+        return true;
+    }
 }
