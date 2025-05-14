@@ -206,4 +206,20 @@ class Solution {
         }
         return true;
     }
+
+
+    // 530 Minimum Absolute Difference in BST
+    TreeNode pre = null;
+    int result = Integer.MAX_VALUE;
+    public void traversal(TreeNode root) {
+        if (root == null) return;
+        traversal(root.left);
+        if (pre != null) result = Math.min(result, root.val - pre.val);
+        pre = root;
+        traversal(root.right);
+    }
+    public int getMinimumDifference(TreeNode root) {
+        traversal(root);
+        return result;
+    }
 }
