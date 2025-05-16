@@ -222,4 +222,36 @@ class Solution {
         traversal(root);
         return result;
     }
+
+
+    // 501 Find Mode in Binary Search Tree
+    int maxCount = 0;
+    int count = 0;
+    TreeNode pre = null;
+    List<Integer> resList =  new ArrayList<>();
+    public void traversal(TreeNode root) {
+        if (root == null) return;
+
+        traversal(root.left);
+        if (pre == null || root.val != pre.val) count = 1;
+        if (pre != null && root.val == pre.val) count++;
+
+        if (count >= maxCount) {
+            if (count > maxCount) {
+                resList.clear();
+            }
+            maxCount = count;
+            resList.add(root.val);
+        }
+        pre = root;
+        traversal(root.right);
+    }
+    public int[] findMode(TreeNode root) {
+        traversal(root);
+        int[] res = new int[resList.size()];
+        for (int i = 0; i < resList.size(); i++) {
+            res[i] = resList.get(i);
+        }
+        return res;
+    }
 }
