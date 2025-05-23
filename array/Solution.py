@@ -24,3 +24,20 @@ class Solution:
                 nums[slow] = nums[fast]
                 slow += 1
         return slow
+
+
+    # 977 Squares of a Sorted Array
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        result = nums.copy()
+        left = 0
+        right = len(nums) - 1
+        i = right
+        while left <= right:
+            if nums[right]*nums[right] > nums[left]*nums[left]:
+                result[i] = nums[right]*nums[right]
+                right -= 1
+            else:
+                result[i] = nums[left]*nums[left]
+                left += 1
+            i -= 1
+        return result
