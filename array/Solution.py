@@ -41,3 +41,20 @@ class Solution:
                 left += 1
             i -= 1
         return result
+
+
+
+    # 209 Minimum Size Subarray Sum
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        left = 0
+        temp = 0
+        result = float('inf')
+
+        for right in range(len(nums)):
+            temp += nums[right]
+            while temp >= target:
+                result = min(result, right - left + 1)
+                temp -= nums[left]
+                left += 1
+        return 0 if result == float('inf') else result
+
