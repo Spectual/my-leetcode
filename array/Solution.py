@@ -58,3 +58,17 @@ class Solution:
                 left += 1
         return 0 if result == float('inf') else result
 
+
+    # 66 Plus One
+    def plusOne(self, digits: List[int]) -> List[int]:
+        num = 0
+        size = len(digits)
+        for i in range(size):
+            num += digits[size-1-i] * (10 ** i)
+        num += 1
+        result = []
+        while num > 0:
+            result.append(num % 10)
+            num = num // 10
+        
+        return result[::-1]
