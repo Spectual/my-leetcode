@@ -11,3 +11,14 @@ class Solution:
                 return False
         return True
 
+
+    # 349 Intersection of Two Arrays
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        record = defaultdict(int)
+        result = set()
+        for i in nums1:
+            record[i] += 1
+        for i in nums2:
+            if record[i] > 0:
+                result.add(i)
+        return list(result)
