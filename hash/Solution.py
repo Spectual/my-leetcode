@@ -22,3 +22,22 @@ class Solution:
             if record[i] > 0:
                 result.add(i)
         return list(result)
+
+
+    # 202 Happy Number
+    def isHappy(self, n: int) -> bool:
+        record = set()
+
+        while True:
+            new_n = 0
+            if n == 1:
+                return True
+            while n > 0:
+                n, r = divmod(n, 10)
+                new_n += r ** 2
+            
+            n = new_n
+            if n in record:
+                return False
+            else:
+                record.add(n)
