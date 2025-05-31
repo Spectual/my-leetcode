@@ -41,3 +41,13 @@ class Solution:
                 return False
             else:
                 record.add(n)
+
+
+    # 1 Two Sum
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        record = dict()
+        for i, n in enumerate(nums):
+            if target - n in record:
+                return [record[target-n], i]
+            record[n] = i
+        return []
