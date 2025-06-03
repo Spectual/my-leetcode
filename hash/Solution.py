@@ -67,3 +67,17 @@ class Solution:
                 if -n3-n4 in record:
                     result += record[0-n3-n4]
         return result
+
+
+    # 383 Ransom Note
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        record = defaultdict(int)
+
+        for c in magazine:
+            record[c] += 1
+        
+        for c in ransomNote:
+            record[c] -= 1
+            if record[c] < 0:
+                return False
+        return True
