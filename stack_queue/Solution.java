@@ -99,4 +99,28 @@ class MyQueue {
         }
         return stack.isEmpty();
     }
+
+
+    // 1047 Remove All Adjacent Duplicates In String
+    public String removeDuplicates(String s) {
+        Deque<Character> stack = new ArrayDeque<>();
+        int size = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (!stack.isEmpty() && s.charAt(i) == stack.peek()) {
+                stack.pop();
+                size--;
+            }
+            else {
+                stack.push(s.charAt(i));
+                size++;
+            }
+        }
+
+        String result = "";
+        while(!stack.isEmpty()) {
+            result = stack.pop() + result;
+        }
+        return result;
+    }
 }
