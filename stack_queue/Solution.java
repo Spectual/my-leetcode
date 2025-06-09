@@ -123,4 +123,40 @@ class MyQueue {
         }
         return result;
     }
+
+
+    // 150 Evaluate Reverse Polish Notation
+    public int evalRPN(String[] tokens) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        int a;
+        int b;
+
+        for (int i = 0; i < tokens.length; i++) {
+            String s = tokens[i];
+            if (s.equals("+")) {
+                b = stack.pop();
+                a = stack.pop();
+                stack.push(a + b);
+            }
+            else if (s.equals("-")) {
+                b = stack.pop();
+                a = stack.pop();
+                stack.push(a - b); 
+            }
+            else if (s.equals("*")) {
+                b = stack.pop();
+                a = stack.pop();
+                stack.push(a * b); 
+            }
+            else if (s.equals("/")) {
+                b = stack.pop();
+                a = stack.pop();
+                stack.push(a / b); 
+            }
+            else {
+                stack.push(Integer.parseInt(s));
+            }
+        }
+        return stack.pop();
+    }
 }
