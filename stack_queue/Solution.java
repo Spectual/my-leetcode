@@ -159,4 +159,50 @@ class MyQueue {
         }
         return stack.pop();
     }
+
+
+    // 239 Sliding Window Maximum
+    class MyQueue {
+        Deque<Integer> que = new LinkedList<>();
+
+        public void poll(int val) {
+            if (!que.isEmpty() && val == que.peek()) {
+                    que.poll();
+            }
+        }
+
+        public void add(int val) {
+            while (!que.isEmpty() && val > que.getLast()) {
+                que.removeLast();
+            }
+            que.offerLast(val);
+        }
+
+        public int peek() {
+            return que.peek();
+        }
+
+    }
+    
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums.length == 1) {
+            return nums;
+        }
+        MyQueue que = new MyQueue();
+        int[] result = new int[nums.length - k + 1];
+        int num = 0;
+
+        for (int i = 0; i < k; i++) {
+            que.add(nums[i]);
+        }
+        result[num++] = que.peek();
+
+        for (int i = k; i < nums.length; i++) {
+            que.poll(nums[i-k]);
+            que.add(nums[i]);
+            result[num++] = que.peek();
+        }
+        return result;
+    }
+
 }
