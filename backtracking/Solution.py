@@ -60,3 +60,24 @@ class Solution:
         path = ""
         self.backtracking(letters, 0, len(digits), results, path)
         return results
+
+
+    # 39 Combination Sum
+    def backtracking(self, candidates, start_index, target, path, result):
+        if sum(path) >= target:
+            if sum(path) == target:
+                result.append(path[:])
+            return
+
+        for i in range(start_index, len(candidates)):
+            path.append(candidates[i])
+            self.backtracking(candidates, i, target, path, result)
+            path.pop()
+
+        
+
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        path = []
+        result = []
+        self.backtracking(candidates, 0, target, path, result)
+        return result
