@@ -36,3 +36,27 @@ class Solution:
         path = []
         self.backtracking(1, k, n, path, result)
         return result
+
+
+    # 17 Letter Combinations of a Phone Number
+    def backtracking(self, letters, start_index, k, results, path):
+        if start_index == k:
+            results.append(path)
+            return
+
+        for i in range(len(letters[start_index])):
+            path += letters[start_index][i]
+            self.backtracking(letters, start_index+1, k, results, path)
+            path = path[:-1]
+
+
+    def letterCombinations(self, digits: str) -> List[str]:
+        if digits == "":
+            return []
+        letter_map = ["", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
+        digits = [int(c) for c in digits]
+        letters = [letter_map[idx] for idx in digits]
+        results = []
+        path = ""
+        self.backtracking(letters, 0, len(digits), results, path)
+        return results
