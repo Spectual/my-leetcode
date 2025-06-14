@@ -45,3 +45,17 @@ class Solution:
                 min_edge = p[1]
                 cnt += 1
         return cnt
+
+
+    # 435 Non-overlapping Intervals
+    def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
+        sorted_intervals = sorted(intervals, key = lambda x: x[0])
+        min_edge = sorted_intervals[0][1]
+        cnt = 0
+        for i in range(1, len(intervals)):
+            if sorted_intervals[i][0] < min_edge:
+                cnt += 1
+                min_edge = min(min_edge, sorted_intervals[i][1])    
+            else:
+                min_edge = sorted_intervals[i][1]
+        return cnt
