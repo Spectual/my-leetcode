@@ -59,3 +59,20 @@ class Solution:
             else:
                 min_edge = sorted_intervals[i][1]
         return cnt
+
+
+    # 763 Partition Labels
+    def partitionLabels(self, s: str) -> List[int]:
+        record = {}
+        result = []
+        left = 0
+        right = 0
+        for i, c in enumerate(s):
+            record[c] = i
+
+        for i, c in enumerate(s):
+            right = max(right, record[c])
+            if i == right:
+                result.append(i - left + 1)
+                left = i + 1
+        return result
