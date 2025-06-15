@@ -93,3 +93,18 @@ class Solution:
         result.append([left, right])
 
         return result
+
+
+    # 738 Monotone Increasing Digits
+    def monotoneIncreasingDigits(self, n: int) -> int:
+        digits = list(str(n))
+        flag = len(digits)
+        if n < 10:
+            return n
+        for i in range(len(digits)-2, -1, -1):
+            if digits[i] > digits[i+1]:
+                digits[i] = str(int(digits[i]) - 1)
+                flag = i+1
+        for i in range(flag, len(digits)):
+            digits[i] = str(9)
+        return int("".join(digits))
