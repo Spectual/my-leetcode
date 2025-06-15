@@ -108,3 +108,26 @@ class Solution:
         for i in range(flag, len(digits)):
             digits[i] = str(9)
         return int("".join(digits))
+
+
+    # 968 Binary Tree Cameras
+    def traverse(self, root, result) -> int:
+        if not root:
+            return 1
+        
+        left = self.traverse(root.left, result)
+        right = self.traverse(root.right, result)
+
+        if left == 1 and right == 1:
+            return 0
+        if left == 0 or right == 0:
+            result[0] += 1
+            return 2
+        if left == 2 or right == 2:
+            return 1
+
+    def minCameraCover(self, root: Optional[TreeNode]) -> int:
+        result = [0]
+        if self.traverse(root, result) == 0:
+            result[0] += 1
+        return result[0]
