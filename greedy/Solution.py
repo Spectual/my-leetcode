@@ -76,3 +76,20 @@ class Solution:
                 result.append(i - left + 1)
                 left = i + 1
         return result
+
+
+    # 56 Merge Intervals
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals = sorted(intervals, key=lambda x: x[0])
+        left = intervals[0][0]
+        right = intervals[0][1]
+        result = []
+
+        for i in range(1, len(intervals)):
+            if intervals[i][0] > right:
+                result.append([left, right])
+                left = intervals[i][0]
+            right = max(right, intervals[i][1])
+        result.append([left, right])
+
+        return result
