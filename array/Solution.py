@@ -98,7 +98,7 @@ class Solution:
             p -= 1
 
 
-    # 26 Remove Duplicates from Scratch
+    # 26 Remove Duplicates from Sorted Array
     def removeDuplicates(self, nums: List[int]) -> int:
         left = 0
         right = 0
@@ -110,3 +110,18 @@ class Solution:
                 nums[cnt-1] = nums[right]
             right += 1
         return cnt
+
+
+    # 80 Remove Duplicates from Sorted Array II
+    def removeDuplicates(self, nums: List[int]) -> int:
+        if len(nums) <= 2:
+            return len(nums)
+
+        k = 2
+        i = 2
+        while i < len(nums):
+            if nums[i] != nums[k-2]:
+                nums[k] = nums[i]
+                k += 1
+            i += 1
+        return k
