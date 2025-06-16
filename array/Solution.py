@@ -96,3 +96,17 @@ class Solution:
                 nums1[p] = nums1[p1]
                 p1 -= 1
             p -= 1
+
+
+    # 26 Remove Duplicates from Scratch
+    def removeDuplicates(self, nums: List[int]) -> int:
+        left = 0
+        right = 0
+        cnt = 1
+        while right < len(nums):
+            if nums[left] != nums[right]:
+                left = right
+                cnt += 1
+                nums[cnt-1] = nums[right]
+            right += 1
+        return cnt
