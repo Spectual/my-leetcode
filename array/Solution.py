@@ -173,3 +173,31 @@ class Solution:
             if citations[i] >= size-i:
                 return size - i
         return 0
+
+
+    # 380 Insert Delete GetRandom O(1)
+    class RandomizedSet:
+
+        def __init__(self):
+            self.arr = []
+            self.pos = {}
+
+        def insert(self, val: int) -> bool:
+            if val in self.arr:
+                return False
+            self.arr.append(val)
+            self.pos[val] = len(self.arr)-1
+            return True
+
+        def remove(self, val: int) -> bool:
+            if val not in self.arr:
+                return False
+            pos = self.pos[val]
+            self.arr[pos] = self.arr[-1]
+            self.pos[self.arr[-1]] = pos
+            self.arr.pop()
+            return True
+
+        def getRandom(self) -> int:
+            return random.choice(self.arr)
+
