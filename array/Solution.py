@@ -162,3 +162,14 @@ class Solution:
             buy = min(buy, p)
             profit = max(profit, p-buy)
         return profit
+
+
+    # 274 H-index
+    def hIndex(self, citations: List[int]) -> int:
+        citations = sorted(citations)
+        size = len(citations)
+
+        for i in range(size):
+            if citations[i] >= size-i:
+                return size - i
+        return 0
