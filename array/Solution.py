@@ -151,3 +151,14 @@ class Solution:
             res[(i + k) % n] = nums[i]
         for i in range(n):
             nums[i] = res[i]
+
+
+    # 121 Best Time to Buy and Sell
+    def maxProfit(self, prices: List[int]) -> int:
+        profit = 0
+        buy = prices[0]
+
+        for p in prices:
+            buy = min(buy, p)
+            profit = max(profit, p-buy)
+        return profit
