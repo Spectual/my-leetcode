@@ -213,3 +213,27 @@ class Solution:
             right[i] = right[i+1] * nums[i+1]
             
         return [x * y for x, y in zip(left, right)]
+
+
+    # 13 Roman to Integer
+    def romanToInt(self, s: str) -> int:
+        record = {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50,
+            "C": 100,
+            "D": 500,
+            "M": 1000
+        }
+
+        result = 0
+        i = 0
+        while i < len(s):
+            if i < len(s)-1 and record[s[i]] < record[s[i+1]]:
+                result += record[s[i+1]] - record[s[i]]
+                i += 2
+            else:
+                result += record[s[i]]
+                i += 1
+        return result
