@@ -237,3 +237,16 @@ class Solution:
                 result += record[s[i]]
                 i += 1
         return result
+
+
+    # 58 Length of Last Word
+    def lengthOfLastWord(self, s: str) -> int:
+        i = len(s) - 1
+        res = 0
+        while i >= 0:
+            if s[i] != ' ':
+                res += 1
+            elif res != 0:
+                return res
+            i -= 1
+        return res
