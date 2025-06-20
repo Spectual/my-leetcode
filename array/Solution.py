@@ -250,3 +250,30 @@ class Solution:
                 return res
             i -= 1
         return res
+
+
+    # 14 Longest Common Prefix
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        size = len(strs)
+        result = []
+        for i in range(len(strs[0])):
+            c = strs[0][i]
+            for j in range(1, size):
+                if i >= len(strs[j]) or c != strs[j][i]:
+                    return "".join(result)
+            result.append(c)
+        return "".join(result)
+
+
+    # 28 Find the index of the First Occurence in a String
+    def strStr(self, haystack: str, needle: str) -> int:
+        i = 0
+        for i in range(len(haystack)-len(needle)+1):
+            isPart = True
+            for j in range(len(needle)):
+                if needle[j] != haystack[i+j]:
+                    isPart = False
+                    break
+            if isPart:
+                return i
+        return -1
