@@ -33,3 +33,18 @@ class Solution:
             j += 1
             
         return False
+
+
+    # 11 Contain With Most Water
+    def maxArea(self, height: List[int]) -> int:
+        left = 0
+        right = len(height) - 1
+        area = 0
+
+        while right >= left:
+            area = max((right-left)*min(height[left], height[right]), area)
+            if height[right] <= height[left]:
+                right -= 1
+            else:
+                left += 1
+        return area
