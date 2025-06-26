@@ -277,3 +277,14 @@ class Solution:
             if isPart:
                 return i
         return -1
+
+
+    # 151 Reverse Words in a String
+    def reverseWords(self, s: str) -> str:
+        s = s.split()
+        res = ""
+        for i in range(len(s)-1, -1, -1):
+            res += s[i]
+            if i != 0:
+                res += " "
+        return res
