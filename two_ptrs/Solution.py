@@ -48,3 +48,17 @@ class Solution:
             else:
                 left += 1
         return area
+    
+
+    # 167 Two Sum II - Input Array Is Sorted
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        left = 0
+        right = len(numbers)-1
+
+        while right > left:
+            if target - numbers[right] == numbers[left]:
+                return [left+1, right+1]
+            elif target - numbers[right] > numbers[left]:
+                left += 1
+            else:
+                right -= 1
