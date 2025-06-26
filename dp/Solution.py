@@ -76,3 +76,14 @@ class Solution:
                 else:
                     dp[i][j] = dp[i-1][j] + dp[i][j-1]
         return dp[m-1][n-1]
+    
+
+    # 343 Integer Break
+    def integerBreak(self, n: int) -> int:
+        dp = [1] * (n + 1)
+        dp[2] = 1
+        
+        for i in range(3, n+1):
+            for j in range(1, i // 2 + 1):
+                dp[i] = max([j * (i - j), j * dp[i - j], dp[i]])
+        return dp[n]
