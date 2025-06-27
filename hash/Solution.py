@@ -96,3 +96,21 @@ class Solution:
             if record_s[s[i]] != record_t[t[i]]:
                 return False
         return True
+    
+
+    # 290 Word Pattern
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        s = s.split()
+        record_p = {}
+        record_s = {}
+        if len(s) != len(pattern):
+            return False
+            
+        for i in range(len(pattern)):
+            if pattern[i] not in record_p:
+                record_p[pattern[i]] = i
+            if s[i] not in record_s:
+                record_s[s[i]] = i
+            if record_p[pattern[i]] != record_s[s[i]]:
+                return False
+        return True
