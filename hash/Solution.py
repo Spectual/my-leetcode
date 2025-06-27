@@ -81,3 +81,18 @@ class Solution:
             if record[c] < 0:
                 return False
         return True
+    
+
+    # 205 Isomorphic Strings
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        record_s = {}
+        record_t = {}
+
+        for i in range(len(s)):
+            if s[i] not in record_s:
+                record_s[s[i]] = i
+            if t[i] not in record_t:
+                record_t[t[i]] = i
+            if record_s[s[i]] != record_t[t[i]]:
+                return False
+        return True
