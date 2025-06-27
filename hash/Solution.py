@@ -114,3 +114,14 @@ class Solution:
             if record_p[pattern[i]] != record_s[s[i]]:
                 return False
         return True
+    
+
+    # 49 Group Anagrams
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        record = defaultdict(list)
+
+        for s in strs:
+            sorted_str = "".join(sorted(s))
+            record[sorted_str].append(s)
+        
+        return list(record.values())
