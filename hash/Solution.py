@@ -125,3 +125,14 @@ class Solution:
             record[sorted_str].append(s)
         
         return list(record.values())
+    
+
+    # 219 Contains Duplicate II
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        record = {}
+        for i in range(len(nums)):
+            if nums[i] in record and i - record[nums[i]] <= k:
+                return True
+            else:
+                record[nums[i]] = i
+        return False
