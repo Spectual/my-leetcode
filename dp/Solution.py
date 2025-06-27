@@ -98,3 +98,22 @@ class Solution:
             for j in range(0, i):
                 dp[i] += dp[j] * dp[i-j-1]
         return dp[n]
+    
+    # 0-1 Knapsack Problem (ACM)
+    def knapsack():
+        n, bagweight = map(int, input().split())
+        weight = list(map(int, input().split()))
+        value = list(map(int, input().split()))
+
+        dp = [[0] * (bagweight+1) for _ in range(n)]
+
+        for j in range(weight[0], bagweight+1):
+            dp[0][j] = value[0]
+
+        for i in range(1, n):
+            for j in range(1, bagweight+1):
+                if j < weight[i]:
+                    dp[i][j] = dp[i-1][j]
+                else:
+                    dp[i][j] = max(dp[i-1][j], value[i]+dp[i-1][j-weight[i]])
+        print(dp[n-1][bagweight])
