@@ -117,3 +117,16 @@ class Solution:
                 else:
                     dp[i][j] = max(dp[i-1][j], value[i]+dp[i-1][j-weight[i]])
         print(dp[n-1][bagweight])
+
+
+    # 416 Partition Equal Subset Sum
+    def canPartition(self, nums: List[int]) -> bool:
+        if sum(nums) % 2 == 1:
+            return False
+        dp = [0] * 10001
+        target = sum(nums) // 2
+
+        for i in range(len(nums)):
+            for j in range(target, nums[i]-1, -1):
+                dp[j] = max(dp[j], dp[j-nums[i]] + nums[i])
+        return dp[target] == target
