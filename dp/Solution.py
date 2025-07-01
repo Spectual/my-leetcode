@@ -130,3 +130,14 @@ class Solution:
             for j in range(target, nums[i]-1, -1):
                 dp[j] = max(dp[j], dp[j-nums[i]] + nums[i])
         return dp[target] == target
+
+
+    # 1049 Last Stone Weight II
+    def lastStoneWeightII(self, stones: List[int]) -> int:
+        dp = [0] * 1501
+        total = sum(stones)
+        target = total // 2
+        for i in range(len(stones)):
+            for j in range(target, stones[i]-1, -1):
+                dp[j] = max(dp[j], dp[j-stones[i]]+stones[i])
+        return total - dp[target] - dp[target]
