@@ -13,3 +13,21 @@ class Solution:
             rootNode.left = self.buildTree(preorder, inorder[0:index])
             rootNode.right = self.buildTree(preorder, inorder[index+1:])
             return rootNode
+    
+
+    # 637 Average of Levels in Binary Tree
+    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+        que = [root]
+        res = []
+        while que:
+            level = []
+            for _ in range(len(que)):
+                node = que.pop(0)
+                if node.left:
+                    que.append(node.left)
+                if node.right:
+                    que.append(node.right)
+                level.append(node.val)
+            avg = sum(level) / len(level)
+            res.append(avg)
+        return res
