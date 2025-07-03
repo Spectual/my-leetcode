@@ -54,3 +54,20 @@ class Solution:
 
         traverse(root)
         return res[0]
+    
+
+    # 114 Flatten Binary Tree to Linked List
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        if root == None:
+            return 
+        if root.left:
+            tmp = root.left
+            while tmp.right:
+                tmp = tmp.right
+            tmp.right = root.right
+            root.right = root.left
+        root.left = None
+        self.flatten(root.right)
