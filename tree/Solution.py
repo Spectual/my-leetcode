@@ -31,3 +31,26 @@ class Solution:
             avg = sum(level) / len(level)
             res.append(avg)
         return res
+    
+
+    # 129 Sum Root to Leaf Numbers
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        res = [0]
+        path = []
+
+        def traverse(root):
+            if root == None:
+                return
+            if root.left == root.right == None:
+                path.append(root.val)    
+                res[0] += int("".join(map(str, path)))
+                path.pop()
+                return
+
+            path.append(root.val)
+            traverse(root.left)
+            traverse(root.right)
+            path.pop()
+
+        traverse(root)
+        return res[0]
