@@ -117,3 +117,23 @@ class Solution:
             res.append(level)
             zigzag = not zigzag
         return res
+    
+
+    # 230 Kth Smallest Element in a BST
+    def __init__(self):
+        self.cnt = 0
+        self.res = None
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+
+        def inorder(root):
+            if not root or self.res is not None:
+                return 
+            inorder(root.left)
+            self.cnt += 1
+            if self.cnt == k:
+                self.res = root.val
+                return 
+            inorder(root.right)
+
+        inorder(root)
+        return self.res
