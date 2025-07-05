@@ -71,3 +71,24 @@ class Solution:
             root.right = root.left
         root.left = None
         self.flatten(root.right)
+
+    
+    # 102 Binary Tree Level Order Traversal
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        res = []
+        
+        if not root:
+            return res
+
+        tmp = [root]
+        while tmp:
+            level = []
+            for _ in range(len(tmp)):
+                node = tmp.pop(0)
+                level.append(node.val)
+                if node.left:
+                    tmp.append(node.left)
+                if node.right:
+                    tmp.append(node.right)
+            res.append(level)
+        return res
