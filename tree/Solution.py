@@ -92,3 +92,28 @@ class Solution:
                     tmp.append(node.right)
             res.append(level)
         return res
+    
+
+    # 103 Binary Tree Zigzag Level Order Traversal
+    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        res = []
+        if not root:
+            return res
+        tmp = [root]
+        zigzag = False
+        while tmp:
+            level_size = len(tmp)
+            level = [0] * level_size
+            for i in range(len(tmp)):
+                node = tmp.pop(0)
+                if zigzag:
+                    level[level_size-1-i] = node.val
+                else:
+                    level[i] = node.val
+                if node.left:
+                    tmp.append(node.left)
+                if node.right:
+                    tmp.append(node.right)
+            res.append(level)
+            zigzag = not zigzag
+        return res
