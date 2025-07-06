@@ -1,3 +1,6 @@
+from typing import List, Optional
+from collections import deque
+
 class Solution:
 
     # All Paths from 1 to N DFS
@@ -124,4 +127,31 @@ class Solution:
                     board[i][j] = "X"
                 elif board[i][j] == "#":
                     board[i][j] = "O"
-        
+    
+
+    # 133 Clone Graph
+    """
+    # Definition for a Node.
+    class Node:
+        def __init__(self, val = 0, neighbors = None):
+            self.val = val
+            self.neighbors = neighbors if neighbors is not None else []
+    """
+    def __init__(self):
+        self.record = {}
+
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if node is None:
+            return None
+
+        def dfs(node):
+            if node in self.record:
+                return self.record[node]
+            
+            copy = Node(node.val)
+            self.record[node] = copy
+            for n in node.neighbors:
+                copy.neighbors.append(dfs(n))
+            return copy
+        copy = dfs(node)
+        return copy
