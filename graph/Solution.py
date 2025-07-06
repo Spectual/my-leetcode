@@ -89,3 +89,39 @@ class Solution:
                     res += 1
                     dfs(grid, i, j, row, col)
         return res   
+
+
+    # 130 Surrounded Regions 
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        m = len(board)
+        n = len(board[0])
+        que = deque()
+
+        for i in range(m):
+            if board[i][0] == "O":
+                que.append((i, 0))
+            if board[i][n-1] == "O":
+                que.append((i, n-1))
+        for j in range(n):
+            if board[0][j] == "O":
+                que.append((0, j))
+            if board[m-1][j] == "O":
+                que.append((m-1, j))
+
+        while que:
+            r, c = que.popleft()
+            if 0 <= r < m and 0 <= c < n and board[r][c] == "O":
+                board[r][c] = "#"
+                for dr, dc in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+                    que.append((r+dr, c+dc))
+
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == "O":
+                    board[i][j] = "X"
+                elif board[i][j] == "#":
+                    board[i][j] = "O"
+        
