@@ -155,3 +155,26 @@ class Solution:
             return copy
         copy = dfs(node)
         return copy
+    
+
+    # 433 Minimum Genetic Mutation
+    def minMutation(self, startGene: str, endGene: str, bank: List[str]) -> int:
+        from collections import deque
+        bank = set(bank)
+
+        if endGene not in bank and startGene != endGene:
+            return -1
+
+        que = deque([(startGene, 0)])
+        visited = {startGene}
+        while que:
+            gene, d = que.popleft()
+            if gene == endGene:
+                return d
+            for i in range(8):
+                for c in ['A', 'C', 'G', 'T']:
+                    mut = gene[:i] + c + gene[i+1:]
+                    if mut in bank and mut not in visited:
+                        visited.add(mut)
+                        que.append((mut, d+1))
+        return -1
