@@ -137,3 +137,22 @@ class Solution:
 
         inorder(root)
         return self.res
+    
+
+    # 236 Lowest Common Ancestor of a Binary Tree
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if not root:
+            return None
+        
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+        
+        if root == q or root == p:
+            return root
+        if left and right:
+            return root
+        elif left:
+            return left
+        elif right:
+            return right
+        return None
