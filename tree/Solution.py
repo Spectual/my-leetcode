@@ -156,3 +156,16 @@ class Solution:
         elif right:
             return right
         return None
+    
+
+    #  235 Lowest Common Ancestor of a Binary Search Tree
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if not root:
+            return None
+        
+        left = self.lowestCommonAncestor(root.left, p, q)
+        print(root.val)
+        if root.val in range(p.val, q.val+1) or root.val in range(q.val, p.val+1):
+            return root
+        right = self.lowestCommonAncestor(root.right, p, q)
+        return left if left else right
