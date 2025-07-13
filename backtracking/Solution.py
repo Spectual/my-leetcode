@@ -81,3 +81,20 @@ class Solution:
         result = []
         self.backtracking(candidates, 0, target, path, result)
         return result
+    
+
+    # 46 Permutations
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        path = []
+        res = []
+        def backtracking(nums, path, res):
+            if not nums:
+                res.append(path[:])
+            for i in range(len(nums)):
+                path.append(nums[i])
+                copy = nums[:]
+                copy.pop(i)
+                backtracking(copy, path, res)
+                path.pop()
+        backtracking(nums, path, res)
+        return res
