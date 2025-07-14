@@ -121,3 +121,33 @@ class Solution:
             
         left.next = left.next.next
         return dummy.next
+    
+
+    # 143 Reorder List
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        fast = head
+        slow = head
+
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+        
+        second = slow.next
+        slow.next = None
+        node = None
+
+        while second:
+            temp = second.next
+            second.next = node
+            node = second
+            second = temp
+
+        cur = head
+        second = node
+        while second:
+            next = cur.next
+            second_next = second.next
+            second.next = next
+            cur.next = second
+            cur = next
+            second = second_next
