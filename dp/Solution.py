@@ -141,3 +141,21 @@ class Solution:
             for j in range(target, stones[i]-1, -1):
                 dp[j] = max(dp[j], dp[j-stones[i]]+stones[i])
         return total - dp[target] - dp[target]
+    
+
+    # 91 Decode Ways
+    def numDecodings(self, s: str) -> int:
+        if s[0] == '0':
+            return 0
+        n = len(s)
+        dp = [0] * (n+1)
+        dp[0], dp[1] = 1, 1
+
+        for i in range(2, n+1):
+            one = int(s[i-1])
+            two = int(s[i-2:i])
+            if one in range(10):
+                dp[i] += dp[i-1]
+            if two in range(1, 27):
+                dp[i] += dp[i-2]
+        return dp[n]
