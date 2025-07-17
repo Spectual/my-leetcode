@@ -154,8 +154,8 @@ class Solution:
         for i in range(2, n+1):
             one = int(s[i-1])
             two = int(s[i-2:i])
-            if one in range(10):
+            if one in range(1, 10):
                 dp[i] += dp[i-1]
-            if two in range(1, 27):
+            if two in range(10, 27):
                 dp[i] += dp[i-2]
         return dp[n]
