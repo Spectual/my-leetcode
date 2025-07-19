@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Tuple
 from collections import deque
 
 class Solution:
@@ -178,3 +178,34 @@ class Solution:
                         visited.add(mut)
                         que.append((mut, d+1))
         return -1
+
+
+    def __init__(self):
+        self.max_dist = 0
+        self.far_node = 0
+
+    # 1245 Tree Diameter
+    def treeDiameter(self, n: int, edges: List[Tuple[int, int]], edge_val: List[int]) -> int:
+        graph = defaultdict(list)
+
+        for i, e in enumerate(edges):
+            a, b = e
+            w = edge_val[i]
+            graph[a].append((b, w))
+            graph[b].append((a, w))
+        
+        def dfs(graph, parent, node, dist):
+            if dist > self.max_dist:
+                self.max_dist = dist
+                self.far_node = node
+
+            for neighbor, w in graph[node]:
+                if neighbor != parent:
+                    dfs(graph, node, neighbor, dist+w)
+        
+        self.max_dist = 0
+        dfs(graph, -1, 0, 0)
+        self.max_dist = 0
+        dfs(graph, -1, self.far_node, 0)
+
+        return self.max_dist
