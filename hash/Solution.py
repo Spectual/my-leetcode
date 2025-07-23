@@ -136,3 +136,19 @@ class Solution:
             else:
                 record[nums[i]] = i
         return False
+    
+
+    # 128 Longest Consecutive Sequence
+    def longestConsecutive(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        nums.sort()
+        length = 1
+        record = {}
+        for n in nums:
+            if n-1 in record:
+                record[n] = record[n-1] + 1
+                length = max(record[n], length)
+            else:
+                record[n] = 1
+        return length
