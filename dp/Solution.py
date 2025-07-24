@@ -159,3 +159,20 @@ class Solution:
             if two in range(10, 27):
                 dp[i] += dp[i-2]
         return dp[n]
+
+
+    # 120 Triangle
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        result = 0
+        n = len(triangle)
+        dp = [[0] * n for _ in range(n)]
+
+        dp[0][0] = triangle[0][0]
+        for i in range(1, n):
+            dp[i][0] = triangle[i][0] + dp[i-1][0]
+        for i in range(1, n):
+            dp[i][i] = triangle[i][i] + dp[i-1][i-1]
+        for i in range(1, n):
+            for j in range(1, i):
+                dp[i][j] = min(dp[i-1][j], dp[i-1][j-1]) + triangle[i][j]
+        return min(dp[n-1])
