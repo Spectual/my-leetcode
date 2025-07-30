@@ -169,3 +169,17 @@ class Solution:
             return root
         right = self.lowestCommonAncestor(root.right, p, q)
         return left if left else right
+
+    # 105 Convert Sorted Array to Binary Search Tree
+    def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
+        n = len(nums)
+        def convert(left, right):
+            if left > right:
+                return None
+            mid = (left + right) // 2
+            node = TreeNode(nums[mid])
+            node.left = convert(left, mid - 1)
+            node.right = convert(mid + 1, right)
+            return node
+
+        return convert(0, n-1)
