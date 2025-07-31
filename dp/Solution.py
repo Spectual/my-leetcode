@@ -234,3 +234,19 @@ class Solution:
                         ) + 1
                     max_len = max(max_len, dp[i][j])
         return max_len ** 2
+
+
+
+    # 300 Longest Increasing Subsequence
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        n = len(nums)
+        dp = [1] * n
+
+        for i in range(n):
+            for j in range(i):
+                if nums[j] < nums[i]:
+                    dp[i] = max(dp[i], dp[j]+1)
+
+        return max(dp)
