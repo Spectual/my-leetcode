@@ -151,3 +151,45 @@ class Solution:
             cur.next = second
             cur = next
             second = second_next
+
+
+    # 148 Sort List
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def merge(l1, l2):
+            dummy = ListNode()
+            cur = dummy
+            while l1 or l2:
+                if l1 and l2:
+                    if l1.val < l2.val:
+                        cur.next = l1
+                        l1 = l1.next
+                    else:
+                        cur.next = l2
+                        l2 = l2.next
+                elif l2 == None:
+                    cur.next = l1
+                    l1 = l1.next
+                else:
+                    cur.next = l2
+                    l2 = l2.next
+                cur = cur.next
+            return dummy.next
+        
+        def getMid(head):
+            slow, fast = head, head.next
+            while fast and fast.next:
+                fast = fast.next.next
+                slow = slow.next
+            mid = slow.next
+            slow.next = None
+            return mid
+
+        def sort(head):
+            if not head or not head.next:
+                return head
+            mid = getMid(head)
+            left = sort(head)
+            right = sort(mid)
+            return merge(left, right)
+        
+        return sort(head)
